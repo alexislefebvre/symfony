@@ -260,7 +260,7 @@ abstract class Client
     {
         $form->setValues($values);
 
-        $values = array_merge($form->getPhpValues(), $additionalValues);
+        $values = array_merge_recursive($form->getPhpValues(), $additionalValues);
 
         return $this->request($form->getMethod(), $form->getUri(), $values, $form->getPhpFiles());
     }
