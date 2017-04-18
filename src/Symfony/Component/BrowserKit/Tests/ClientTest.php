@@ -286,6 +286,43 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://www.example.com/foo', $client->getRequest()->getUri(), '->submit() submit forms');
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Unreachable field "foo"
+     */
+    public function testSubmitMissingField()
+    {
+        $client = new TestClient();
+        $client->setNextResponse(new Response('<html><form action="/foo"><input type="submit" /></form></html>'));
+        $crawler = $client->request('GET', 'http://www.example.com/foo/foobar');
+
+        $client->submit($crawler->filter('input')->form(), array('foo[0]' => 'bar'));
+    }
+
+    /**
+     * Submit the same data that in testSubmitMissingField() but
+     * without triggering an Exception.
+     */
+    public function testSubmitWithAdditionalValues()
+    {
+        $client = new TestClient();
+        $client->setNextResponse(new Response('<html><form action="/foo"><input type="submit" /></form></html>'));
+        $crawler = $client->request('GET', 'http://www.example.com/foo/foobar');
+
+        $client->submitWithAdditionalValues($crawler->filter('input')->form(), array(), array('foo[0]' => 'bar'));
+
+        $this->assertEquals('http://www.example.com/foo', $client->getRequest()->getUri(), '->submit() submit forms');
+
+        // The field "foo[0]" have been converted to an array "foo => 0".
+        $this->assertEquals(
+            array('foo' => array(
+                '0' => 'bar',
+            )),
+            $client->getRequest()->getParameters(),
+            'parameters have not been added'
+        );
+    }
+
     public function testSubmitPreserveAuth()
     {
         $client = new TestClient(array('PHP_AUTH_USER' => 'foo', 'PHP_AUTH_PW' => 'bar'));
