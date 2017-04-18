@@ -250,16 +250,19 @@ abstract class Client
     /**
      * Submits a form.
      *
-     * @param Form  $form   A Form instance
-     * @param array $values An array of form field values
+     * @param Form  $form             A Form instance
+     * @param array $values           An array of form field values
+     * @param array $additionalValues An array of additional field values
      *
      * @return Crawler
      */
-    public function submit(Form $form, array $values = array())
+    public function submit(Form $form, array $values = array(), $additionalValues = array())
     {
         $form->setValues($values);
 
-        return $this->request($form->getMethod(), $form->getUri(), $form->getPhpValues(), $form->getPhpFiles());
+        $values = array_merge_recursive($form->getPhpValues(), $additionalValues);
+
+        return $this->request($form->getMethod(), $form->getUri(), $values, $form->getPhpFiles());
     }
 
     /**
