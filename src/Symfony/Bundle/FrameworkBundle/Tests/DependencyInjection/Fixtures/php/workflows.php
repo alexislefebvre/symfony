@@ -70,6 +70,9 @@ $container->loadFromExtension('framework', array(
                     'to' => 'travis',
                     'metadata' => array(
                         'title' => 'transition submit title',
+                        'style' => array(
+                            'label' => 'My custom label',
+                        ),
                     ),
                 ),
                 'update' => array(

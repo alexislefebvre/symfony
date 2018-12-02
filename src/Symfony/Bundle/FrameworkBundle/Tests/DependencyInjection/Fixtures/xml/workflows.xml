@@ -58,6 +58,11 @@
                 <framework:metadata>
                     <framework:title>transition submit title</framework:title>
                 </framework:metadata>
+                <framework:metadata>
+                    <framework:style>
+                        <framework:label>My custom label</framework:label>
+                    </framework:style>
+                </framework:metadata>
             </framework:transition>
             <framework:transition name="update">
                 <framework:from>coding</framework:from>

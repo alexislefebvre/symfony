@@ -259,7 +259,7 @@ abstract class FrameworkExtensionTest extends TestCase
         $this->assertInstanceOf(Definition::class, $params[0]);
         $this->assertSame(Workflow\Transition::class, $params[0]->getClass());
         $this->assertSame(array('submit', 'start', 'travis'), $params[0]->getArguments());
-        $this->assertSame(array('title' => 'transition submit title'), $params[1]);
+        $this->assertSame(array('title' => 'transition submit title','style' => array('label' => 'My custom label')), $params[1]);
 
         $serviceMarkingStoreWorkflowDefinition = $container->getDefinition('workflow.service_marking_store_workflow');
         /** @var Reference $markingStoreRef */
