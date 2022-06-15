@@ -25,7 +25,7 @@ class WrappedListenerTest extends TestCase
     {
         $wrappedListener = new WrappedListener($listener, null, $this->createMock(Stopwatch::class), $this->createMock(EventDispatcherInterface::class));
 
-        $this->assertStringMatchesFormat($expected, $wrappedListener->getPretty());
+        $this->assertSame($expected, $wrappedListener->getPretty());
     }
 
     public function provideListenersToDescribe()
