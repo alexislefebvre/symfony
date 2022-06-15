@@ -29,7 +29,7 @@ class DotenvTest extends TestCase
             $dotenv->parse($data);
             $this->fail('Should throw a FormatException');
         } catch (FormatException $e) {
-            $this->assertStringMatchesFormat($error, $e->getMessage());
+            $this->assertSame($error, $e->getMessage());
         }
     }
 
