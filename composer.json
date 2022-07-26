@@ -188,6 +188,7 @@
     },
     "scripts": {
         "docker-build": "docker build --tag symfony-tests .docker/",
+        "docker-diagnose": "docker run --tty --volume $(pwd):/symfony symfony-tests composer diagnose",
         "docker-composer": "docker run --tty --volume $(pwd):/symfony --volume /tmp/composer-cache/:/root/.composer/cache/ symfony-tests sh -c 'COMPOSER_ROOT_VERSION=6.2.x-dev composer update -vvv'",
         "docker-tests": "docker run --tty --volume $(pwd):/symfony --volume /tmp/composer-cache/:/root/.composer/cache/ symfony-tests php ./phpunit"
     },
