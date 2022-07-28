@@ -191,7 +191,7 @@
         "docker-run": "docker run --rm --tty --volume $(pwd):/symfony symfony-tests",
         "docker-diagnose": "@docker-run composer diagnose",
         "docker-shell": "@docker-run sh",
-        "docker-composer": "@docker-run sh .docker/composer-update.sh",
+        "docker-composer": "@docker-run env COMPOSER_ROOT_VERSION=6.2.x-dev composer update",
         "docker-tests": [
             "Composer\\Config::disableProcessTimeout",
             "@docker-run php ./phpunit"
