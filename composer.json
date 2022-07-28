@@ -196,6 +196,13 @@
             "@docker-run php ./phpunit"
         ]
     },
+    "scripts-descriptions": {
+        "docker-build": "Build the Docker image",
+        "docker-run": "Base command to run Docker",
+        "docker-diagnose": "Run composer diagnose",
+        "docker-composer": "Install dependencies through Composer",
+        "docker-tests": "Run tests, you can pass arguments with “--”, e.g. composer docker-tests -- src/Symfony/Component/Workflow/"
+    },
     "repositories": [
         {
             "type": "path",
